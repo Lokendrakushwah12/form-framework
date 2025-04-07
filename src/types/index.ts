@@ -2,6 +2,7 @@ export interface FormSection {
   id: string;
   title: string;
   fields: FormField[];
+  bgColor?: string;
   description?: string;
   order: number;
   layout?: "full" | "left" | "right";
@@ -12,7 +13,7 @@ export interface FormField {
   key: string;
   label: string;
   type: "text" | "boolean" | "select" | "date";
-  options?: { label: string; value: string }[];
+  options?: string[];
   colSpan?: 1 | 2;
   required?: boolean;
   placeholder?: string;

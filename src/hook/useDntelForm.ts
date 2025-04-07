@@ -13,7 +13,6 @@ export const useDntelForm = (
   const [editMode, setEditMode] = useState<boolean>(false);
 
   // Refs
-  const sectionsRef = useRef<{ [key: string]: HTMLDivElement }>({});
   const initialRender = useRef(true);
 
   // Get sorted sections
@@ -75,12 +74,17 @@ export const useDntelForm = (
   }, []);
 
   const expandSection = useCallback((sectionId: string) => {
-    setExpandedSections((prev) =>
-      prev.includes(sectionId) ? prev : [...prev, sectionId]
-    );
+    setExpandedSections((prev) => {
+      if (prev.includes(sectionId)) {
+        return prev.filter((id) => id !== sectionId);
+      } else {
+        return [...prev, sectionId];
+      }
+    });
   }, []);
 
   const collapseSection = useCallback((sectionId: string) => {
+    console.log("collapseSection section:", sectionId);
     setExpandedSections((prev) => prev.filter((id) => id !== sectionId));
   }, []);
 
@@ -94,8 +98,10 @@ export const useDntelForm = (
 
   const scrollToSection = useCallback(
     (sectionId: string) => {
-      if (sectionsRef.current[sectionId]) {
-        sectionsRef.current[sectionId].scrollIntoView({ behavior: "smooth" });
+      console.log("Scrolling to section:", sectionId);
+      const element = document.getElementById(`${sectionId}`);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
         setActiveSection(sectionId);
         expandSection(sectionId);
       }

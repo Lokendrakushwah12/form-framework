@@ -19,17 +19,40 @@ const DntelForm: React.FC<DntelFormProps> = ({
   onExpandSection,
   editMode,
 }) => {
+  const getValue = (key: string) => {
+    if (key in changes) {
+      return changes[key];
+    }
+    return getNestedValue(key);
+  };
+
+  const getNestedValue = (key: string) => {
+    const keys = key.split(".");
+    let value = changes;
+    for (const k of keys) {
+      if (value && typeof value === "object") {
+        value = value[k];
+      } else {
+        return undefined;
+      }
+    }
+    return value;
+  };
   return (
     <div className="space-y-8">
       {sections.map((section) => (
         <div
           key={section.id}
           id={section.id}
-          className="bg-neutral-100 p-2 rounded-lg"
+          style={{
+            backgroundColor: section?.bgColor,
+          }}
+          className="p-2 rounded-lg"
         >
           <div className="flex justify-between p-2 rounded-lg items-center mb-2">
             <h3 className="text-xl text-[#3e7864] font-semibold">
               {section.title}
+              {section.bgColor}
             </h3>
             <button
               onClick={() => onExpandSection(section.id)}
@@ -48,17 +71,18 @@ const DntelForm: React.FC<DntelFormProps> = ({
 
           {expandedSections.includes(section.id) && (
             <div className="grid grid-cols-2 px-2 gap-4">
-              {section.fields.map((field, index) => {
+              {section.fields.map((field) => {
                 if (!field || typeof field !== "object" || !("type" in field)) {
                   console.warn("Skipping invalid field:", field);
                   return null;
                 }
+                const value = getValue(field.id);
 
                 return (
                   <FormField
                     key={field.id}
                     field={field}
-                    value={changes[field.id]}
+                    value={value}
                     onChange={(val) => onChangeValue(field.id, val)}
                     editMode={editMode}
                     colSpan={field.colSpan || 2}

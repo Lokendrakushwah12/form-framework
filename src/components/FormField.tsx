@@ -23,7 +23,6 @@ const FormField: React.FC<FormFieldProps> = ({
   colSpan = 2,
 }) => {
   // Determine current field type based on value
-  console.log("Rendering FormField:", field);
   const currentType =
     typeof value === "string" && field.type !== "text"
       ? getFieldCurrentType(field.type, value)
@@ -103,8 +102,8 @@ const FormField: React.FC<FormFieldProps> = ({
               </SelectTrigger>
               <SelectContent>
                 {field.options?.map((option) => (
-                  <SelectItem key={option.value} value={option.value}>
-                    {option.label}
+                  <SelectItem key={option} value={option}>
+                    {option}
                   </SelectItem>
                 ))}
               </SelectContent>
