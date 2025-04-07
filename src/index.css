@@ -42,9 +42,9 @@
 }
 
 :root {
-  --font-inter: 'InterVariable', sans-serif;
+  --font-inter: "Inter Variable", sans-serif;
   --radius: 0.625rem;
-  --background: oklch(0.14 0 0);
+  --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -119,6 +119,24 @@
     @apply bg-background text-foreground;
   }
 }
+
+html {
+  scrollbar-color: #a1a1aa #fff;
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--font-inter);
+}
+
+input:-webkit-autofill {
+  background-color: transparent !important;
+  color: inherit !important;
+  transition: background 5000s ease-in-out 0s;
+  -webkit-text-fill-color: inherit !important;
+}
+
+::selection {
+  background-color: oklch(0.69 0.1931 44.88 / 20%);
 }
