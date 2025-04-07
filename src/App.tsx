@@ -12,13 +12,13 @@ function App() {
 
   return (
     <div className="container mx-auto text-[#212121] p-4 w-full flex flex-col gap-20">
-      <div className="flex gap-4 w-full justify-between">
+      <div className="flex flex-wrap gap-4 w-full justify-between">
         <div className="mb-8 space-y-4">
-          <div className="flex justify-between items-center w-full gap-2">
+          <div className="flex flex-wrap justify-between items-center w-full gap-2">
             <span className="text-base flex justify-center items-center gap-1 font-semibold">
               <FormInput /> Form Framework
             </span>
-            <div className="flex justify-end gap-2 items-center">
+            <div className="flex flex-wrap justify-end gap-2 items-center">
               <Button
                 variant={"outline"}
                 onClick={() => form.setEditMode(!form.editMode)}
@@ -106,7 +106,7 @@ function App() {
         </div>
 
         {/* Debug Information */}
-        <div className="p-4 border rounded-lg h-fit">
+        <div className="p-4 border w-full rounded-lg h-fit">
           <span className="text-lg font-semibold">State of Form:</span>
           <pre className="text-sm p-2 rounded-lg bg-neutral-100 overflow-x-auto">
             {JSON.stringify(
