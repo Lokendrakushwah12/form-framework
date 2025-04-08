@@ -7,54 +7,55 @@ import { convertRawToFormData } from "./lib/convertRawToFormData";
 import { FormData } from "./types";
 
 function App() {
+  console.log("DntelFormData:", DntelFormData);
   const initialData = convertRawToFormData(DntelFormData);
   const form = useDntelForm(initialData as FormData, "dntel-form-data");
+  console.log("initialData:", initialData);
 
   return (
-    <div className="container mx-auto text-[#212121] p-4 w-full flex flex-col gap-20">
-      <div className="flex flex-wrap gap-4 w-full justify-between">
-        <div className="mb-8 space-y-4">
-          <div className="flex flex-wrap justify-between items-center w-full gap-2">
-            <span className="text-base flex justify-center items-center gap-1 font-semibold">
-              <FormInput /> Form Framework
-            </span>
-            <div className="flex flex-wrap justify-end gap-2 items-center">
-              <Button
-                variant={"outline"}
-                onClick={() => form.setEditMode(!form.editMode)}
-                title="Click to enable/disable form editing"
-                className="shadow-sm"
-              >
-                {form.editMode ? (
-                  <>
-                    <X /> Exit Edit Mode
-                  </>
-                ) : (
-                  <>
-                    <Edit />
-                    Enter Edit Mode
-                  </>
-                )}
-              </Button>
-              <Button
-                variant={"outline"}
-                onClick={form.expandAll}
-                title="Opens all form sections"
-                className="shadow-sm"
-              >
-                Expand All
-              </Button>
-              <Button
-                variant={"outline"}
-                onClick={form.collapseAll}
-                title="Closes all form sections"
-                className="shadow-sm"
-              >
-                Collapse All
-              </Button>
-            </div>
-          </div>
-
+    <div className="container mx-auto text-[#212121] p-4 w-full flex flex-col gap-10">
+      <div className="flex flex-wrap justify-between items-center w-full gap-2">
+        <span className="text-base flex justify-center items-center gap-1 font-semibold">
+          <FormInput /> Form Framework
+        </span>
+        <div className="flex flex-wrap justify-end gap-2 items-center">
+          <Button
+            variant={"outline"}
+            onClick={() => form.setEditMode(!form.editMode)}
+            title="Click to enable/disable form editing"
+            className="shadow-sm"
+          >
+            {form.editMode ? (
+              <>
+                <X /> Exit Edit Mode
+              </>
+            ) : (
+              <>
+                <Edit />
+                Enter Edit Mode
+              </>
+            )}
+          </Button>
+          <Button
+            variant={"outline"}
+            onClick={form.expandAll}
+            title="Opens all form sections"
+            className="shadow-sm"
+          >
+            Expand All
+          </Button>
+          <Button
+            variant={"outline"}
+            onClick={form.collapseAll}
+            title="Closes all form sections"
+            className="shadow-sm"
+          >
+            Collapse All
+          </Button>
+        </div>
+      </div>
+      <div className="flex md:flex-nowrap flex-wrap gap-4 w-full justify-center">
+        <div className="mb-8 md:w-1/2 space-y-4">
           {/* Section Navigation */}
           <div className="flex flex-col gap-2">
             <span className="text-lg font-semibold">Navigation:</span>
@@ -106,7 +107,7 @@ function App() {
         </div>
 
         {/* Debug Information */}
-        <div className="p-4 border w-full rounded-lg h-fit">
+        <div className="p-4 border md:w-1/2 w-full rounded-lg h-fit">
           <span className="text-lg font-semibold">State of Form:</span>
           <pre className="text-sm p-2 rounded-lg bg-neutral-100 overflow-x-auto">
             {JSON.stringify(

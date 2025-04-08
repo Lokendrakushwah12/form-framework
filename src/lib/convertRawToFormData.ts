@@ -11,6 +11,7 @@ export function convertRawToFormData(raw: any): FormData {
       id,
       title: section.title,
       description: section.tooltip,
+      bgColor: section.bgColor,
       order: section.order,
       layout: section.layout,
       fields: Object.entries(section.fields).map(
@@ -19,6 +20,7 @@ export function convertRawToFormData(raw: any): FormData {
           key,
           label: field.title,
           type: isValidFieldType(field.interface?.type) ? field.interface.type : "text",
+          value: field.value,
           options: field.interface?.options || [],
           colSpan: field.colSpan === "2" || field.colSpan === 2 ? 2 : 1,
           required: Boolean(field.required),

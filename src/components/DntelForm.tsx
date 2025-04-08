@@ -19,6 +19,9 @@ const DntelForm: React.FC<DntelFormProps> = ({
   onExpandSection,
   editMode,
 }) => {
+  console.log("section: ", sections);
+  console.log("SrfgrS", sections[0].id, sections[0].bgColor);
+
   const getValue = (key: string) => {
     if (key in changes) {
       return changes[key];
@@ -44,16 +47,13 @@ const DntelForm: React.FC<DntelFormProps> = ({
         <div
           key={section.id}
           id={section.id}
-          style={{
-            backgroundColor: section?.bgColor,
-          }}
+          style={{ backgroundColor: section.bgColor || "#f0f0f0" }}
           className="p-2 rounded-lg"
         >
           <div className="flex justify-between p-2 rounded-lg items-center mb-2">
             <h3 className="text-xl text-[#3e7864] font-semibold">
               {section.title}
-              {section.bgColor}
-            </h3>
+              </h3>
             <button
               onClick={() => onExpandSection(section.id)}
               className="text-sm cursor-pointer text-[#3e7864] hover:underline"
@@ -82,7 +82,7 @@ const DntelForm: React.FC<DntelFormProps> = ({
                   <FormField
                     key={field.id}
                     field={field}
-                    value={value}
+                    value={field.value || value}
                     onChange={(val) => onChangeValue(field.id, val)}
                     editMode={editMode}
                     colSpan={field.colSpan || 2}

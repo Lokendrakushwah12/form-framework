@@ -12,6 +12,7 @@ export interface FormField {
   id: string;
   key: string;
   label: string;
+  value?: any;
   type: "text" | "boolean" | "select" | "date";
   options?: string[];
   colSpan?: 1 | 2;
