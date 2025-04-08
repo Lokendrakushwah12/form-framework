@@ -48,12 +48,17 @@ const DntelForm: React.FC<DntelFormProps> = ({
           key={section.id}
           id={section.id}
           style={{ backgroundColor: section.bgColor || "#f0f0f0" }}
-          className="p-2 rounded-lg"
+          className={`p-2 rounded-lg transition-all border-2 
+          ${
+            expandedSections.includes(section.id)
+              ? "border-[#3e7864]/20"
+              : "border-[#3e7864]/0"
+          }`}
         >
           <div className="flex justify-between p-2 rounded-lg items-center mb-2">
             <h3 className="text-xl text-[#3e7864] font-semibold">
               {section.title}
-              </h3>
+            </h3>
             <button
               onClick={() => onExpandSection(section.id)}
               className="text-sm cursor-pointer text-[#3e7864] hover:underline"

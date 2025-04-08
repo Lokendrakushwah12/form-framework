@@ -14,6 +14,7 @@ export interface FormField {
   label: string;
   value?: any;
   type: "text" | "boolean" | "select" | "date";
+  groupId?: string; // For repeating groups
   options?: string[];
   colSpan?: 1 | 2;
   required?: boolean;
